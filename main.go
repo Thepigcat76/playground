@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"os"
+	"regexp"
 	"strings"
 
 	"playground/cmd"
@@ -35,7 +36,7 @@ func run() *error {
 
 		input, err := util.Input()
 
-		newString := strings.Trim(input, "\n")
+		newString := removeCtrlChars(input)
 
 		args := strings.Split(newString, " ")
 
@@ -95,4 +96,15 @@ func registerCmds() {
 
 func register(cmds ...cmd.Command) {
 	commands = append(commands, cmds...)
+}
+
+
+func removeCtrlChars(input string) string {
+	// Define a regular expression to match control characters
+	controlCharRegex := regexp.MustCompile(`[[:cntrl:]]`)
+
+	// Replace control characters with an empty string
+	cleanedString := controlCharRegex.ReplaceAllString(input, "")
+
+	return cleanedString
 }
