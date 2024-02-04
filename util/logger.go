@@ -21,5 +21,5 @@ func LogErr(msg string) {
 }
 
 func log(level string, msg string) {
-	fmt.Printf("[%s] > %s", level, msg)
+	fmt.Printf("[%s] > %s\n", level, msg)
 }
